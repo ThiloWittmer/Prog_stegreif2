@@ -1,4 +1,4 @@
-import java.awt.image.BufferedImage;
+
 import java.io.File;
 import java.io.IOException;
 
@@ -19,7 +19,7 @@ public interface Filter {
 }
 
 
-
+/* 
 public BufferedImage process(BufferedImage ... image){
 
     //Bilder laden/speichern
@@ -48,3 +48,5 @@ public BufferedImage process(BufferedImage ... image){
 public BufferdImage calculate(int pixelColor){
 
 }
+
+*/

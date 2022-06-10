@@ -1,3 +1,3 @@
-public class class Maske {
+public class Maske {
     
 }
