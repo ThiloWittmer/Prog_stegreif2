@@ -1,6 +1,6 @@
 import java.awt.image.BufferedImage;
 
-public class ColorBandFilter extends PixelFilter {
+public class ThresholdFilter extends PixelFilter {
 
     @Override
     public BufferedImage process() {
