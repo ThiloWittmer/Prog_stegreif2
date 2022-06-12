@@ -1,6 +1,6 @@
 import java.awt.image.BufferedImage;
 
-public class MonochromeFilter extends PixelFilter {
+public final class MonochromeFilter extends PixelFilter {
 
     @Override
     public BufferedImage process() {
