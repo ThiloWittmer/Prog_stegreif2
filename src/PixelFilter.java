@@ -14,7 +14,7 @@ public abstract class PixelFilter implements Filter {
         int[] img = (image.length > 0) ? image[0].getRGB(0, 0, width, heigth, null, 0, width) : null;
         int[] mask = (image.length > 1) ? image[1].getRGB(0, 0, width, heigth, null, 0, width) : null;
 
-        for (int i = 0; i < mask.length; i++) {
+        for (int i = 0; i < img.length; i++) {
             if (mask == null || mask[i] > 0xFF000000) {
                 img[i] = calculate(img[i], filterParam);
             }
