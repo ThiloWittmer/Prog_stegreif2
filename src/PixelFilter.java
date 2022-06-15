@@ -1,32 +1,26 @@
 import java.awt.image.*;
 
-import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
-
 
 public abstract class PixelFilter implements Filter {
 	
 
-    public abstract BufferedImage calculate(BufferedImage image);
+    public abstract int calculate(int pixelColor, String filterParam);
     
     
-    public BufferedImage process() {
-    
-	BufferedImage image = null;
+    public BufferedImage process(String filterParam, BufferedImage ... image) {
+        int width = image[0].getWidth();
+        int heigth = image[0].getHeight();
 
-    try{
-        image = ImageIO.read(new File("input_image.bmp"));
-        
-        calculate(image);
-        
-   
-        ImageIO.write(image, "bmp", new File ("output_image.bmp"));
-    } catch(IOException e){
-        //TODO Auto-generated
-        e.printStackTrace();
-    }
-	return image;
+        int[] img = (image.length > 0) ? image[0].getRGB(0, 0, width, heigth, null, 0, width) : null;
+        int[] mask = (image.length > 1) ? image[1].getRGB(0, 0, width, heigth, null, 0, width) : null;
+
+        for (int i = 0; i < mask.length; i++) {
+            if (mask == null || mask[i] > 0xFF000000) {
+                img[i] = calculate(img[i], filterParam);
+            }
+        }
+
+        image[0] .setRGB(0, 0, width, heigth, img, 0, width);
+        return image[0];
     }
 }
