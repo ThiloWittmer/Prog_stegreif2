@@ -28,12 +28,13 @@ public class ColorReplacementFilter extends PixelFilter {
 	
     @Override
     public int calculate(int pixelColor) throws IOException {
+		if (col1 == null && c1 == 0) {
+			throw new IOException("no color set");
+		}
 		if (col1.getRGB() == pixelColor) {
 			return col2.getRGB();
 		} else if (c1 == pixelColor) {
 			return c2;
-		} else {
-			throw new IOException("no color set");
-		}
+		} else return pixelColor;
 	}
 }
