@@ -4,7 +4,7 @@ import java.awt.image.*;
 public abstract class PixelFilter implements Filter {
 	
 
-    public abstract int calculate(int pixelColor, String filterParam);
+    public abstract int calculate(int pixelColor);
     
     
     public BufferedImage process(String filterParam, BufferedImage ... image) {
@@ -16,7 +16,7 @@ public abstract class PixelFilter implements Filter {
 
         for (int i = 0; i < img.length; i++) {
             if (mask == null || mask[i] > 0xFF000000) {
-                img[i] = calculate(img[i], filterParam);
+                img[i] = calculate(img[i]);
             }
         }
 
