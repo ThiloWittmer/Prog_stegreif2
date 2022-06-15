@@ -4,10 +4,10 @@ import java.awt.image.*;
 public abstract class PixelFilter implements Filter {
 	
 
-    public abstract int calculate(int pixelColor);
+    public abstract int calculate(int pixelColor) throws Exception;
     
     
-    public BufferedImage process(String filterParam, BufferedImage ... image) {
+    public BufferedImage process(BufferedImage ... image) {
         int width = image[0].getWidth();
         int heigth = image[0].getHeight();
 
@@ -16,7 +16,11 @@ public abstract class PixelFilter implements Filter {
 
         for (int i = 0; i < img.length; i++) {
             if (mask == null || mask[i] > 0xFF000000) {
-                img[i] = calculate(img[i]);
+                try {
+                    img[i] = calculate(img[i]);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }
 
