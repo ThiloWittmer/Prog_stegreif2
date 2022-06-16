@@ -35,9 +35,13 @@ public class PixelGraphicFilter extends AreaFilter {
 
         for (int i = 0; i < pixelSize; i++) {
             for (int j = 0; j < pixelSize; j++) {
-                avgR += (pixel[tmpIndex + j] >> 16) & 0xFF;
-                avgG += (pixel[tmpIndex + j] >> 8) & 0xFF;
-                avgB += pixel[tmpIndex + j] & 0xFF;
+            	try {
+	                avgR += (pixel[tmpIndex + j] >> 16) & 0xFF;
+	                avgG += (pixel[tmpIndex + j] >> 8) & 0xFF;
+	                avgB += pixel[tmpIndex + j] & 0xFF;
+            	} catch (IndexOutOfBoundsException e) {
+                    e.printStackTrace();
+                }
             }
             tmpIndex += width;
         }
