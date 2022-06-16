@@ -1,14 +1,19 @@
-import java.awt.image.BufferedImage;
 
 public class ColorBandFilter extends PixelFilter {
+    private String color;
+
+    public ColorBandFilter(String color) {
+        this.color = color;
+    }
 
     @Override
-    public int calculate(int pixelColor,String filterParam ) {
+    public int calculate(int pixelColor) {
+
         int rot =(pixelColor >>16) & 0xff;
         int gruen =(pixelColor >>8) & 0xff;
         int blau =pixelColor & 0xff ;
 
-        switch(filterParam){
+        switch(color){
             case "RED":
                 gruen = 0;
                 blau = 0;
@@ -20,8 +25,9 @@ public class ColorBandFilter extends PixelFilter {
             case "GREEN":
                 rot = 0;
                 blau = 0;
-                break;
             }
+        
+        pixelColor = 0;
         
         pixelColor |=  (rot << 16);
         pixelColor |= (gruen << 8);
