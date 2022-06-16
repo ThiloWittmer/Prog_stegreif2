@@ -7,40 +7,31 @@ import javax.imageio.ImageIO;
 
 public final class MonochromeFilter extends PixelFilter {
 
-	
-	@Override
-	public BufferedImage process() {
+	public MonochromeFilter() {
 		
-    	BufferedImage image = null;
-
-        try{
-            image = ImageIO.read(new File("input_image.bmp"));
-            
-            calculate(image);
-            
-       
-            ImageIO.write(image, "bmp", new File ("output_image.bmp"));
-        } catch(IOException e){
-            //TODO Auto-generated
-            e.printStackTrace();
-        }
-		return image;
-	
 	}
 
+
     @Override
-    public BufferedImage calculate(BufferedImage img) {
+    public int calculate(int pixelColor, String filterParam) {
     	
-    	img = process();
+    	int r = (pixelColor >> 16) & 0xFF;
+    	int g = (pixelColor >> 8) & 0xFF;
+    	int b = pixelColor >> 0xFF;
     	
-    	int[] pixel;
+    	pixelColor = 0;
     	
+    	int average = (r + g + b) / 3; 
     	
+    	pixelColor |= average << 16;
+    	pixelColor |= average << 8;
+    	pixelColor |= average;
     	
-    	return img;
-		
-        // TODO Auto-generated method stub
-    
+    	return pixelColor;
+    	
+
+    	
     }
+    
 }   
 
