@@ -19,7 +19,7 @@ public class PixelGraphicFilter extends AreaFilter {
         if (widthPointer % pixelSize != 0) {
             return pixel[index -1];
         } else if(heightPointer % pixelSize != 0) {
-            return pixel[index + width];
+            return pixel[index - width];
         } else {
             pixel[index] = calcColor(pixel, index, width);
             return pixel[index];
