@@ -10,6 +10,7 @@ public class Control {
 		BufferedImage image = null;
 		Color c = new Color(0xb5cbd9);
 		ColorReplacementFilter filter = new ColorReplacementFilter(c);
+		PixelGraphicFilter filter2 = new PixelGraphicFilter(20);
 
 		try {
 			image = ImageIO.read(new File("./bilder/test_image.bmp"));
@@ -17,7 +18,7 @@ public class Control {
 			e.printStackTrace();
 		}
 		
-		image = filter.process(image);
+		image = filter2.process(image);
 		
 		try {
 			ImageIO.write(image, "bmp", new File("./bilder/output.bmp"));
