@@ -28,18 +28,29 @@ public class PixelGraphicFilter extends AreaFilter {
     }
 
     private int calcColor(int[] pixel, int index, int width) {
-        int avg = 0;
+        int avgR = 0;
+        int avgG = 0;
+        int avgB = 0;
+        int tmpIndex = index;
 
         for (int i = 0; i < pixelSize; i++) {
             for (int j = 0; j < pixelSize; j++) {
-                avg += pixel[index + j];
+                avgR += (pixel[tmpIndex + j] >> 16) & 0xFF;
+                avgG += (pixel[tmpIndex + j] >> 8) & 0xFF;
+                avgB += pixel[tmpIndex + j] & 0xFF;
             }
-            index += width;
+            tmpIndex += width;
         }
 
-        avg = avg/(pixelSize * pixelSize);
+        avgR /= (pixelSize * pixelSize);
+        avgG /= (pixelSize * pixelSize);
+        avgB /= (pixelSize * pixelSize);
 
-        return avg;
+        pixel[index] |= avgR << 16;
+        pixel[index] |= avgG << 8;
+        pixel[index] |= avgB;
+
+        return pixel[index];
     }
     
     public void setPixelSize(int pixelSize) {

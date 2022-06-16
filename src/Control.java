@@ -8,12 +8,14 @@ public class Control {
 	public static void main(String[] args) {
 		// nur ein Testlauf:
 		BufferedImage image = null;
+		BufferedImage mask = null;
 		Color c = new Color(0xb5cbd9);
 		ColorReplacementFilter filter = new ColorReplacementFilter(c);
-		PixelGraphicFilter filter2 = new PixelGraphicFilter(20);
+		PixelGraphicFilter filter2 = new PixelGraphicFilter(5);
 
 		try {
 			image = ImageIO.read(new File("./bilder/test_image.bmp"));
+			mask = ImageIO.read(new File("./bilder/mask.bmp"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
