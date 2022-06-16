@@ -16,13 +16,9 @@ public class MultiTreshhold extends PixelFilter{
     
         int aktHelligkeit = (rot + gruen + blau) / 3; // Durchschnitt der Helligkeit
          
-        // angegebene Schwellwerte 64, 128, 192
-        int schwellwert[] = new int[3];
+        // angegebene Schwellwerte
+        int schwellwert[] = {64, 128, 192};
 
-//        final int SCHWELLWERT, SCHWELLWERT2, SCHWELLWERT3;
-//        schwellwert[0]  =64;
-//        schwellwert[1] =128;
-//        schwellwert[2] =192;
 
         //erforderliche Werte der Grautöne
 

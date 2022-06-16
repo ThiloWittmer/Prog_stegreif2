@@ -5,6 +5,10 @@ import java.util.Map;
 import java.awt.Color;
 import javax.imageio.ImageIO;
 
+/**
+ * Liest Argumente aus und wendet entsprechende Filter an
+ */
+
 public class Control {
 
 	public static void main(String[] args) {
@@ -96,6 +100,11 @@ public class Control {
 		}
 	}
 
+	/**
+	 * Speichert ein Bild mit angegebenem Dateinamen ab
+	 * @param fileName Dateiname
+	 * @param image Bild
+	 */
 	private static void write(String fileName, BufferedImage image) {
 		try {
 			ImageIO.write(image, "bmp", new File(fileName));
@@ -104,6 +113,11 @@ public class Control {
 		}
 	}
 
+	/**
+	 * Gibt ein Bild mit angegebenem Dateinamen zurück
+	 * @param fileName
+	 * @return
+	 */
 	private static BufferedImage read(String fileName) {
 		BufferedImage image = null; 
 		try {
