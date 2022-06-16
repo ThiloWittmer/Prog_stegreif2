@@ -1,11 +1,21 @@
 
+/**
+ * BlurFilter(Weichzeichnungsfilter)
+ * 
+ * 
+ * Auslösung der Konturen des Bildes mit einem angegebenen Radius 
+ */
+
 public class BlurFilter extends AreaFilter {
     private int radius;
 
     public BlurFilter(int radius) {
         this.radius = radius;
-    }
 
+    }
+    // geht das Bild durch und ruft der Calculate-Methode auf
+     
+    // Berechnung der Pixeln von dem Bild
     @Override
     public int calculate(int[] pixel, int index, int width) throws IndexOutOfBoundsException {
         int avgR = 0;
