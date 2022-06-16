@@ -1,4 +1,8 @@
-
+/**
+ * MultiTreshold-Filter
+ * 
+ * Treshold Filter mit mehreren Grautönen
+ */
 public class MultiTreshhold extends PixelFilter{
 
     public int calculate(int pixelColor) {
@@ -7,24 +11,30 @@ public class MultiTreshhold extends PixelFilter{
         int gruen =(pixelColor >>8) & 0xff;
         int blau =pixelColor & 0xff ;
     
-        int aktHelligkeit = (rot + gruen + blau) / 3; //für die reduzierung der Helligkeit
+        int aktHelligkeit = (rot + gruen + blau) / 3; // Durchschnitt der Helligkeit
          
-        final int SCHWELLWERT, SCHWELLWERT2, SCHWELLWERT3;
-        SCHWELLWERT  =64;
-        SCHWELLWERT2 =128;
-        SCHWELLWERT3 =192;
+        // angegebene Schwellwerte 64, 128, 192
+        int schwellwert[] = new int[3];
+
+//        final int SCHWELLWERT, SCHWELLWERT2, SCHWELLWERT3;
+//        schwellwert[0]  =64;
+//        schwellwert[1] =128;
+//        schwellwert[2] =192;
+
+        //erforderliche Werte der Grautöne
 
         final int  GRAUTON1=0;
         final int  GRAUTON2=92;
         final int  GRAUTON3=160;
         final int  GRAUTON4=255;
 
+            //Einsetzen der Grautöne
 
-            if(aktHelligkeit >= SCHWELLWERT3){
+            if(aktHelligkeit >= schwellwert[2]){
                 aktHelligkeit = GRAUTON4;
-            }else if( aktHelligkeit >= SCHWELLWERT2){
+            }else if( aktHelligkeit >= schwellwert[1]){
                 aktHelligkeit = GRAUTON3;
-            }else if( aktHelligkeit >= SCHWELLWERT){
+            }else if( aktHelligkeit >= schwellwert[0]){
                 aktHelligkeit = GRAUTON2;
             }
             else{
