@@ -1,8 +1,9 @@
-import java.awt.image.BufferedImage;
 
 public class ThresholdFilter extends PixelFilter {
 	
-	protected int schwellwert;
+	private int schwellwert;
+	private final int SCHWARZ = 0;
+	private final int WEISS = 255;
 
 	public ThresholdFilter(int wert) {
 		this.schwellwert = wert;
@@ -20,9 +21,9 @@ public class ThresholdFilter extends PixelFilter {
     	int average = (r + g + b) / 3;
     	
     	if (average >= schwellwert) {
-    		average = 255; 
+    		average = WEISS; 
     	}else {
-    		average = 0;
+    		average = SCHWARZ;
     	}
     	
     	
