@@ -11,7 +11,7 @@ public class Control {
 		BufferedImage mask = null;
 		Color c = new Color(0xb5cbd9);
 		ColorReplacementFilter filter = new ColorReplacementFilter(c);
-		PixelGraphicFilter filter2 = new PixelGraphicFilter(5);
+		PixelGraphicFilter filter2 = new PixelGraphicFilter(10);
 
 		try {
 			image = ImageIO.read(new File("./bilder/test_image.bmp"));

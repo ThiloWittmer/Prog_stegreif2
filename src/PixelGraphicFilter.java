@@ -42,9 +42,11 @@ public class PixelGraphicFilter extends AreaFilter {
             tmpIndex += width;
         }
 
-        avgR /= (pixelSize * pixelSize);
-        avgG /= (pixelSize * pixelSize);
-        avgB /= (pixelSize * pixelSize);
+        avgR = Math.round((float) avgR / (pixelSize * pixelSize));
+        avgG = Math.round((float) avgG / (pixelSize * pixelSize));
+        avgB = Math.round((float) avgB / (pixelSize * pixelSize));
+
+        pixel[index] = 0;
 
         pixel[index] |= avgR << 16;
         pixel[index] |= avgG << 8;
