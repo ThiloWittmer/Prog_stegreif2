@@ -3,8 +3,13 @@ import java.util.ArrayList;
 
 public class ChainFilter implements Filter{
 
+
+    //Liste von Filter die alle zur Verfuegung stehen
     private ArrayList<Filter> filters = new ArrayList<Filter>();
 
+    /***
+     * Nimmt sich das ubermittelte Bild und falls auch die Maske und wendet auf diese alle ausgewaehlten Filter an
+     */
     @Override
     public BufferedImage process(BufferedImage... image) {
 

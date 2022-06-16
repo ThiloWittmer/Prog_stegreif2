@@ -7,6 +7,13 @@ public class ColorReplacementFilter extends PixelFilter {
 	private int c1 = 0;
 	private int c2 = 0;
 	
+	/**
+	 * Konstrukturen fuer Uebergabe der Farbe die ersetzt werden soll und mit welcher.
+	 * Zufallsauswahl falls keine Farbe gesetzt wurde
+	 * 
+	 * @param col1
+	 * @param col2
+	 */
 	public ColorReplacementFilter(Color col1, Color col2) {
 		this.col1 = col1;
 		this.col2 = col2;
@@ -25,7 +32,12 @@ public class ColorReplacementFilter extends PixelFilter {
 	public ColorReplacementFilter(int c1) {
 		this(new Color(c1));
 	}
-	
+
+
+	/***
+	 * 
+	 * Setzt neuen Farbwert
+	 */
     @Override
     public int calculate(int pixelColor) throws IOException {
 		if (col1 == null && c1 == 0) {

@@ -2,10 +2,19 @@
 public class PixelGraphicFilter extends AreaFilter {
     private int pixelSize;
 
+    /**
+     * 
+     * @param pixelSize Uebergabe wie groß der verpixelte neue Pixel werden soll
+     */
     public PixelGraphicFilter(int pixelSize) {
         this.pixelSize =  pixelSize;
     }
 
+   /***
+    * 
+    * Berechnet die Kooridanten des aktuellen Pixels und setzt die richtige Farbe 
+    * 
+    */
     @Override
     public int calculate(int[] pixel, int index, int width) {
         int widthPointer = index % width;
@@ -27,6 +36,15 @@ public class PixelGraphicFilter extends AreaFilter {
 
     }
 
+    /**
+     * 
+     * Gibt die Durchschnittsfarbe von allen Pixeln die betrachtet werden aus
+     * 
+     * @param pixel Array aller Pixel 
+     * @param index Stelle im Array
+     * @param width 
+     * @return
+     */
     private int calcColor(int[] pixel, int index, int width) {
         int avgR = 0;
         int avgG = 0;
