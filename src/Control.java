@@ -1,36 +1,117 @@
 import java.awt.image.*;
 import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 import java.awt.Color;
-
 import javax.imageio.ImageIO;
+
 public class Control {
 
 	public static void main(String[] args) {
-		// nur ein Testlauf:
-		BufferedImage image = null;
-		//BufferedImage mask = null;
-		//Color c = new Color(0xb5cbd9);
-		//ColorReplacementFilter filter = new ColorReplacementFilter(c);
-		//PixelGraphicFilter filter2 = new PixelGraphicFilter(10);
-		//ColorBandFilter filter3 = new ColorBandFilter("RED");
+		BufferedImage image;
+		BufferedImage tmpImage;
+		BufferedImage maskImage = null;
+		String input = "";
+		String output = "";
+		String mask = "";
+		String filter = "";
+		boolean test = false;
+		final Color GREY1 = new Color(98, 98, 98);
+		final Color GREY2 = new Color(160, 160, 160);
+		ChainFilter warhol = new ChainFilter();
 		
-		int wert = 64;
-		ThresholdFilter filter = new ThresholdFilter(wert);
+
+		//Hashmap mit allen vorgegebenen Filtern
+		Map<String, Filter> filters = new HashMap<String, Filter>();
+
+		filters.put("blur_3", new BlurFilter(3));
+		filters.put("blur_5", new BlurFilter(5));
+		filters.put("monochrom", new MonochromeFilter());
+		filters.put("colorband_red", new ColorBandFilter("RED"));
+		filters.put("colorband_green", new ColorBandFilter("GREEN"));
+		filters.put("colorband_blue", new ColorBandFilter("BLUE"));
+		filters.put("threshhold_128", new ThresholdFilter(128));
+		filters.put("threshhold_192", new ThresholdFilter(192));
+		filters.put("multithreshold", new MultiTreshhold());
+		filters.put("colorreplacement_98", new ColorReplacementFilter(GREY1));
+		filters.put("colorreplacement_160", new ColorReplacementFilter(GREY2));
+		filters.put("colorreplacement_255", new ColorReplacementFilter(Color.white));
+		filters.put("pixel_20", new PixelGraphicFilter(20));
+		filters.put("pixel_40", new PixelGraphicFilter(40));
+		filters.put("pixel_60", new PixelGraphicFilter(60));
 		
+		warhol.add(new MultiTreshhold());
+		warhol.add(new ColorReplacementFilter(Color.black));
+		warhol.add(filters.get("colorreplacement_98"));
+		warhol.add(filters.get("colorreplacement_160"));
+		warhol.add(filters.get("colorreplacement_255"));
+		
+		filters.put("warhol", warhol);
+
+
+		//Args einlesen
+		for (int i = 0; i < args.length; i++) {
+			if (args[i].equals("-m")) {
+				mask = args[i+1];
+			} else if (!args[i].contains(".") && !args[i].contains("-")) {
+				switch(args[i]) {
+					case "test": test = true;
+					break;
+					default: filter = args[i];
+				}
+			} else if (args[i].contains(".") && !args[i-1].contains("-")) {
+				switch (input) {
+					case "": 
+						input = args[i];
+						break;
+					default:
+						output = args[i];
+				}
+			}
+		}
+
+		//Bild und Maske einlesen
+		image = read(input);
+		if (!mask.equals("")) {
+			maskImage = read(mask);
+		}
+
+		//filter anwenden
+		if (!test) {
+			try {
+				image = filters.get(filter).process(image, maskImage);				
+				//Bild ausgeben
+				write(output, image);
+			} catch (Exception e) {
+				System.out.println("Dieser Filtername ist ungültig");
+				e.printStackTrace();
+			}
+		} else {
+			//Testdurchlauf
+			for (Map.Entry<String, Filter>  currFilter : filters.entrySet()) {
+				tmpImage = currFilter.getValue().process(image);
+				output = filter + "_" + currFilter.getKey() + ".bmp";
+				write(output, tmpImage);
+			}
+		}
+	}
+
+	private static void write(String fileName, BufferedImage image) {
 		try {
-			image = ImageIO.read(new File("./bilder/test_image.bmp"));
-			//mask = ImageIO.read(new File("./bilder/mask.bmp"));
+			ImageIO.write(image, "bmp", new File(fileName));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		image = filter.process(image);
-		
+	}
+
+	private static BufferedImage read(String fileName) {
+		BufferedImage image = null; 
 		try {
-			ImageIO.write(image, "bmp", new File("./bilder/output.bmp"));
+			image = ImageIO.read(new File(fileName));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return image;
 	}
 
 }

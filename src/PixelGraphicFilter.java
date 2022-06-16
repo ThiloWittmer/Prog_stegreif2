@@ -55,7 +55,4 @@ public class PixelGraphicFilter extends AreaFilter {
         return pixel[index];
     }
     
-    public void setPixelSize(int pixelSize) {
-        this.pixelSize = pixelSize;
-    }
 }
