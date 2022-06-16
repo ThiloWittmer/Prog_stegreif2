@@ -1,6 +1,9 @@
+/**
+ * ColorBand-Filter.
+ */
 
 public class ColorBandFilter extends PixelFilter {
-    private String color;
+        private String color;
 
     public ColorBandFilter(String color) {
         this.color = color;
@@ -13,6 +16,8 @@ public class ColorBandFilter extends PixelFilter {
         int gruen =(pixelColor >>8) & 0xff;
         int blau =pixelColor & 0xff ;
 
+        
+        // Farbe ersetzen
         switch(color){
             case "RED":
                 gruen = 0;
