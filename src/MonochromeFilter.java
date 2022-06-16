@@ -1,19 +1,8 @@
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.util.Calendar;
-
-import javax.imageio.ImageIO;
 
 public final class MonochromeFilter extends PixelFilter {
 
-	public MonochromeFilter() {
-		
-	}
-
-
     @Override
-    public int calculate(int pixelColor, String filterParam) {
+    public int calculate(int pixelColor) {
     	
     	int r = (pixelColor >> 16) & 0xFF;
     	int g = (pixelColor >> 8) & 0xFF;
@@ -28,10 +17,6 @@ public final class MonochromeFilter extends PixelFilter {
     	pixelColor |= average;
     	
     	return pixelColor;
-    	
-
-    	
-    }
-    
+    }  
 }   
 

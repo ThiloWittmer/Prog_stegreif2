@@ -7,7 +7,7 @@ public class BlurFilter extends AreaFilter {
     }
 
     @Override
-    public int calculate(int[] pixel, int[] maskPixel, int index, int width, int height) throws IndexOutOfBoundsException {
+    public int calculate(int[] pixel, int index, int width) throws IndexOutOfBoundsException {
         int avgR = 0;
         int avgG = 0;
         int avgB = 0;
@@ -23,7 +23,7 @@ public class BlurFilter extends AreaFilter {
                     avgB += pixel[tmpIndex-tmpWidth + j] & 0xFF;
                     count++;
                 } catch (IndexOutOfBoundsException e) {
-                    break;
+                    e.printStackTrace();
                 }
             }
             tmpIndex -= width; 

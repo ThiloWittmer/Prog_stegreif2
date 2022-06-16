@@ -7,7 +7,7 @@ public class PixelGraphicFilter extends AreaFilter {
     }
 
     @Override
-    public int calculate(int[] pixel, int[] maskPixel, int index, int width, int height) {
+    public int calculate(int[] pixel, int index, int width) {
         int widthPointer = index % width;
         int heightPointer = index / width;
 
