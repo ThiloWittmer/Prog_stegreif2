@@ -1,5 +1,10 @@
 import java.awt.image.*;
 
+/***
+ * 
+ * Areafilter Ueberklasse um die richtigen Parameter an die process Methode zu uebergeben die einen Bereich betrachten 
+ * 
+ */
 public abstract class AreaFilter implements Filter {
  
     public abstract int calculate(int[] pixel, int index, int width);

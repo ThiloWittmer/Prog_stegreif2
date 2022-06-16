@@ -1,5 +1,8 @@
 public final class MonochromeFilter extends PixelFilter {
 
+	/***
+	 * Setzt fuer jede Farbe denn Mittelwert des übergebenen Pixels
+	 */
     @Override
     public int calculate(int pixelColor) {
     	

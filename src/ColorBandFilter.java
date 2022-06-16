@@ -6,6 +6,9 @@ public class ColorBandFilter extends PixelFilter {
         this.color = color;
     }
 
+    /***
+     * Ersetzt alle anderen Farben durch die jeweils gewaehlte im Pixel
+     */
     @Override
     public int calculate(int pixelColor) {
 

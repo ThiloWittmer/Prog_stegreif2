@@ -1,6 +1,10 @@
 import java.awt.image.*;
 
-
+/***
+ * 
+ * Pixelfilter Ueberklasse um die richtigen Parameter an die process Methode zu uebergeben
+ * Geht durch jedes Pixel und ruft die Methode calculate zur Pixelberechnung auf
+ */
 public abstract class PixelFilter implements Filter {
 	
 

@@ -1,13 +1,16 @@
 
 public class MultiTreshhold extends PixelFilter{
 
+    /***
+     * Setzt die in den Einzelnen Grautoene anhand ihrer Schwellwertes
+     */
     public int calculate(int pixelColor) {
 
         int rot =(pixelColor >>16) & 0xff;
         int gruen =(pixelColor >>8) & 0xff;
         int blau =pixelColor & 0xff ;
     
-        int aktHelligkeit = (rot + gruen + blau) / 3; //für die reduzierung der Helligkeit
+        int aktHelligkeit = (rot + gruen + blau) / 3;  
          
         final int SCHWELLWERT, SCHWELLWERT2, SCHWELLWERT3;
         SCHWELLWERT  =64;
