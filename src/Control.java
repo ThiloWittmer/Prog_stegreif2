@@ -3,10 +3,13 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import java.awt.Color;
+
 import javax.imageio.ImageIO;
 
 /**
  * Liest Argumente aus und wendet entsprechende Filter an
+ * 
+ * @author Thilo Wittmer, Aaron Stier, Muhanad Khatib
  */
 
 public class Control {
@@ -92,9 +95,9 @@ public class Control {
 			}
 		} else {
 			//Testdurchlauf
-			for (Map.Entry<String, Filter>  currFilter : filters.entrySet()) {
-				tmpImage = currFilter.getValue().process(image);
-				output = filter + "_" + currFilter.getKey() + ".bmp";
+			for (String  currKey : filters.keySet()) {
+				tmpImage = filters.get(currKey).process(image, maskImage);
+				output = filter + "_" + currKey + ".bmp";
 				write(output, tmpImage);
 			}
 		}

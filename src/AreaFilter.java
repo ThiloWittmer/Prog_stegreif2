@@ -12,6 +12,7 @@ public abstract class AreaFilter implements Filter {
     public BufferedImage process(BufferedImage ... image) {
 		int width = image[0].getWidth();
         int height = image[0].getHeight();
+        BufferedImage output = new BufferedImage(width, height, image[0].getType());
 
         int[] img = (image.length > 0 && image[0] != null) ? image[0].getRGB(0, 0, width, height, null, 0, width) : null;
         int[] mask = (image.length > 1 && image[1] != null) ? image[1].getRGB(0, 0, width, height, null, 0, width) : null;
@@ -22,8 +23,8 @@ public abstract class AreaFilter implements Filter {
             }
         }
         
-        image[0].setRGB(0, 0, width, height, img, 0, width);
-        return image[0];
+        output.setRGB(0, 0, width, height, img, 0, width);
+        return output;
     }
 
 }
