@@ -7,7 +7,7 @@ import java.awt.image.*;
  */
 public abstract class AreaFilter implements Filter {
  
-    public abstract int calculate(int[] pixel, int index, int width);
+    public abstract int calculate(int[] pixel, int[] mask, int index, int width);
 
     public BufferedImage process(BufferedImage ... image) {
 		int width = image[0].getWidth();
@@ -19,7 +19,7 @@ public abstract class AreaFilter implements Filter {
 
         for (int i = 0; i < img.length; i++) {
             if (mask == null || mask[i] > 0xFF000000) {
-                img[i] = calculate(img, i, width);
+                img[i] = calculate(img, mask, i, width);
             }
         }
         

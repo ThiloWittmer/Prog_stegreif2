@@ -16,12 +16,12 @@ public class PixelGraphicFilter extends AreaFilter {
     * 
     */
     @Override
-    public int calculate(int[] pixel, int index, int width) {
+    public int calculate(int[] pixel, int[] mask, int index, int width) {
         int widthPointer = index % width;
         int heightPointer = index / width;
 
         if (index == 0) {
-            pixel[index] = calcColor(pixel, index, width);
+            pixel[index] = calcColor(pixel, mask, index, width);
             return pixel[index];
         }
 
@@ -30,7 +30,7 @@ public class PixelGraphicFilter extends AreaFilter {
         } else if(heightPointer % pixelSize != 0) {
             return pixel[index - width];
         } else {
-            pixel[index] = calcColor(pixel, index, width);
+            pixel[index] = calcColor(pixel, mask, index, width);
             return pixel[index];
         }
 
@@ -45,28 +45,28 @@ public class PixelGraphicFilter extends AreaFilter {
      * @param width 
      * @return
      */
-    private int calcColor(int[] pixel, int index, int width) {
+    private int calcColor(int[] pixel, int[] mask, int index, int width) {
         int avgR = 0;
         int avgG = 0;
         int avgB = 0;
         int tmpIndex = index;
+        int count = 0;
 
         for (int i = 0; i < pixelSize; i++) {
             for (int j = 0; j < pixelSize; j++) {
-            	try {
+            	if (mask == null || mask[tmpIndex + j] > 0xFF000000) {
 	                avgR += (pixel[tmpIndex + j] >> 16) & 0xFF;
 	                avgG += (pixel[tmpIndex + j] >> 8) & 0xFF;
 	                avgB += pixel[tmpIndex + j] & 0xFF;
-            	} catch (IndexOutOfBoundsException e) {
-                    e.printStackTrace();
-                }
+	                count ++;
+            	}
             }
             tmpIndex += width;
         }
 
-        avgR = Math.round((float) avgR / (pixelSize * pixelSize));
-        avgG = Math.round((float) avgG / (pixelSize * pixelSize));
-        avgB = Math.round((float) avgB / (pixelSize * pixelSize));
+        avgR = Math.round((float) avgR / (count));
+        avgG = Math.round((float) avgG / (count));
+        avgB = Math.round((float) avgB / (count));
 
         pixel[index] = 0;
 

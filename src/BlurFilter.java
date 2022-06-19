@@ -17,24 +17,26 @@ public class BlurFilter extends AreaFilter {
      
     // Berechnung der Pixeln von dem Bild
     @Override
-    public int calculate(int[] pixel, int index, int width) throws IndexOutOfBoundsException {
+    public int calculate(int[] pixel, int[] mask, int index, int width) {
         int avgR = 0;
         int avgG = 0;
         int avgB = 0;
         int tmpIndex = index;
         int tmpWidth = radius / 2;
         int count = 0;
+        int currIndex;
 
         for (int i = 0; i < (radius/2+1); i++) {
             for (int j = 0; j < (tmpWidth*2 + 1); j++) {
-                try {
-                    avgR += (pixel[tmpIndex-tmpWidth + j] >> 16) & 0xFF;
-                    avgG += (pixel[tmpIndex-tmpWidth + j] >> 8) & 0xFF;
-                    avgB += pixel[tmpIndex-tmpWidth + j] & 0xFF;
-                    count++;
-                } catch (IndexOutOfBoundsException e) {
-                    e.printStackTrace();
-                }
+            	currIndex = tmpIndex-tmpWidth + j;
+            	if (currIndex >= 0 && currIndex < pixel.length) {
+            		if (mask == null || mask[currIndex] > 0xFF000000) {
+	                    avgR += (pixel[currIndex] >> 16) & 0xFF;
+	                    avgG += (pixel[currIndex] >> 8) & 0xFF;
+	                    avgB += pixel[currIndex] & 0xFF;
+	                    count++;
+            		}
+            	}
             }
             tmpIndex -= width; 
             tmpWidth--;
@@ -45,14 +47,15 @@ public class BlurFilter extends AreaFilter {
         
         for (int i = 0; i < (radius/2); i++) {
             for (int j = 0; j < (tmpWidth*2 + 1); j++) {
-                try {
-                    avgR += (pixel[tmpIndex-tmpWidth + j] >> 16) & 0xFF;
-                    avgG += (pixel[tmpIndex-tmpWidth + j] >> 8) & 0xFF;
-                    avgB += pixel[tmpIndex-tmpWidth + j] & 0xFF;
-                    count++;
-                } catch (IndexOutOfBoundsException e) {
-                    e.printStackTrace();
-                }
+            	currIndex = tmpIndex-tmpWidth + j;
+            	if (currIndex >= 0 && currIndex < pixel.length) {
+            		if (mask == null || mask[currIndex] > 0xFF000000) {
+	                    avgR += (pixel[currIndex] >> 16) & 0xFF;
+	                    avgG += (pixel[currIndex] >> 8) & 0xFF;
+	                    avgB += pixel[currIndex] & 0xFF;
+	                    count++;
+            		}
+            	}
             }
             tmpIndex += width;
             tmpWidth--;

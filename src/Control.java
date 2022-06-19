@@ -90,7 +90,7 @@ public class Control {
 				//Bild ausgeben
 				write(output, image);
 			} catch (Exception e) {
-				System.out.println("Dieser Filtername ist ungültig");
+				System.out.println("Dieser Filtername ist ungueltig");
 				e.printStackTrace();
 			}
 		} else {
