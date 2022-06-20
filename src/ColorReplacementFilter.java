@@ -1,5 +1,4 @@
 import java.awt.Color;
-import java.io.IOException;
 
 public class ColorReplacementFilter extends PixelFilter {
 	private Color col1 = null;
@@ -39,10 +38,7 @@ public class ColorReplacementFilter extends PixelFilter {
 	 * Setzt neuen Farbwert
 	 */
     @Override
-    public int calculate(int pixelColor) throws IOException {
-		if (col1 == null && c1 == 0) {
-			throw new IOException("no color set");
-		}
+    public int calculate(int pixelColor) {
 		if (col1.getRGB() == pixelColor) {
 			return col2.getRGB();
 		} else if (c1 == pixelColor) {

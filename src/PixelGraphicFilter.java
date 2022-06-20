@@ -54,11 +54,13 @@ public class PixelGraphicFilter extends AreaFilter {
 
         for (int i = 0; i < pixelSize; i++) {
             for (int j = 0; j < pixelSize; j++) {
-            	if (mask == null || mask[tmpIndex + j] > 0xFF000000) {
-	                avgR += (pixel[tmpIndex + j] >> 16) & 0xFF;
-	                avgG += (pixel[tmpIndex + j] >> 8) & 0xFF;
-	                avgB += pixel[tmpIndex + j] & 0xFF;
-	                count ++;
+            	if ((tmpIndex +j) >= 0 && (tmpIndex + j) < pixel.length) {
+	            	if (mask == null || mask[tmpIndex + j] > 0xFF000000) {
+		                avgR += (pixel[tmpIndex + j] >> 16) & 0xFF;
+		                avgG += (pixel[tmpIndex + j] >> 8) & 0xFF;
+		                avgB += pixel[tmpIndex + j] & 0xFF;
+		                count ++;
+	            	}
             	}
             }
             tmpIndex += width;
