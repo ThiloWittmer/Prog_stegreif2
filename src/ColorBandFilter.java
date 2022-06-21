@@ -3,10 +3,10 @@
  */
 
 public class ColorBandFilter extends PixelFilter {
-        private String color;
+        private colorBandFilterEnum color;
 
-    public ColorBandFilter(String color) {
-        this.color = color;
+    public ColorBandFilter(String ColorBandFilterEnum) {
+        this.color = ColorBandFilterEnum;
     }
 
     /***
@@ -22,7 +22,7 @@ public class ColorBandFilter extends PixelFilter {
         
         // Farbe ersetzen
         switch(color){
-            case "RED":
+            case ColorBandFilterEnum.RED:
                 gruen = 0;
                 blau = 0;
                 break;
