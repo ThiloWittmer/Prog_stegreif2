@@ -35,8 +35,8 @@ public class Control {
 		filters.put("blur_5", new BlurFilter(5));
 		filters.put("monochrom", new MonochromeFilter());
 		filters.put("colorband_red", new ColorBandFilter(ColorBandFilterEnum.RED));
-		filters.put("colorband_green", new ColorBandFilter("GREEN"));
-		filters.put("colorband_blue", new ColorBandFilter("BLUE"));
+		filters.put("colorband_green", new ColorBandFilter(ColorBandFilterEnum.GREEN));
+		filters.put("colorband_blue", new ColorBandFilter(ColorBandFilterEnum.BLUE));
 		filters.put("threshhold_128", new ThresholdFilter(128));
 		filters.put("threshhold_192", new ThresholdFilter(192));
 		filters.put("multithreshold", new MultiTreshhold());
