@@ -8,7 +8,7 @@ public final class MonochromeFilter extends PixelFilter {
     	
     	int r = (pixelColor >> 16) & 0xFF;
     	int g = (pixelColor >> 8) & 0xFF;
-    	int b = pixelColor >> 0xFF;
+    	int b = pixelColor & 0xFF;
     	
     	pixelColor = 0;
     	

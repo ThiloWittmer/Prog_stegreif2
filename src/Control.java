@@ -46,6 +46,9 @@ public class Control {
 		filters.put("pixel_20", new PixelGraphicFilter(20));
 		filters.put("pixel_40", new PixelGraphicFilter(40));
 		filters.put("pixel_60", new PixelGraphicFilter(60));
+		filters.put("contrast_1.7", new ContrastFilter(1.7f));
+		filters.put("contrast_1.0", new ContrastFilter(1.0f));
+		filters.put("contrast_0.3", new ContrastFilter(0.3f));
 		
 		warhol.add(new MultiTreshhold());
 		warhol.add(new ColorReplacementFilter(Color.black));
